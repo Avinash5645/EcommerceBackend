@@ -45,6 +45,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+
+// Initialize Roles and Admin
+using (var scope = app.Services.CreateScope())
+{
+    await DbInitializer.SeedRolesAndAdminAsync(scope.ServiceProvider);
+}
+
 // **Apply migrations at startup**
 using (var scope = app.Services.CreateScope())
 {

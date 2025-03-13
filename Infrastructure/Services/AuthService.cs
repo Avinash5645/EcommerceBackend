@@ -40,8 +40,12 @@ public class AuthService : IAuthService
             throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
 
+        // Assign 'User' Role by default
+        await _userManager.AddToRoleAsync(user, "User");
+
         return GenerateJwtToken(user);
     }
+
 
     public async Task<string> LoginAsync(LoginDto loginDto)
     {
