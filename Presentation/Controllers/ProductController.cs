@@ -1,10 +1,12 @@
 ﻿using Application.DTOs;
 using Core.Entities;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
 
+[Authorize] // Requires authentication for all endpoints
 [Route("api/[controller]")]
 [ApiController]
 public class ProductController : ControllerBase
@@ -19,6 +21,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous] // Open to public
     public async Task<ActionResult<IEnumerable<ProductDto>>> GetProducts()
     {
         var products = await _productRepository.GetAllAsync();
@@ -36,6 +39,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [AllowAnonymous] // Open to public
     public async Task<ActionResult<ProductDto>> GetProduct(int id)
     {
         var product = await _productRepository.GetByIdAsync(id);
@@ -55,6 +59,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")] // Restricted to Admin only
     public async Task<ActionResult<ProductDto>> CreateProduct([FromBody] AddProductDto addProductDto)
     {
         // Check if the provided CategoryId exists
@@ -89,6 +94,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDto updateProductDto)
     {
         var existingProduct = await _productRepository.GetByIdAsync(id);
@@ -107,17 +113,18 @@ public class ProductController : ControllerBase
         existingProduct.ImageUrl = updateProductDto.ImageUrl;
         existingProduct.CategoryId = updateProductDto.CategoryId;
 
-         _productRepository.Update(existingProduct);
+        _productRepository.Update(existingProduct);
         return NoContent();
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
     public async Task<IActionResult> DeleteProduct(int id)
     {
         var product = await _productRepository.GetByIdAsync(id);
         if (product == null) return NotFound();
 
-         _productRepository.Delete(product);
+        _productRepository.Delete(product);
         return NoContent();
     }
 }

@@ -1,0 +1,984 @@
+{
+	"info": {
+		"_postman_id": "a206b3a5-bad8-4669-a4f8-d1a4ec2d213d",
+		"name": "EcommerceBackend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37740116"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "/api/Auth/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"admin\",\r\n  \"email\": \"user@ecommerce.com\",\r\n  \"password\": \"Admin@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/api/Auth/register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fullName\": \"string\",\r\n  \"email\": \"string@gmail.com\",\r\n  \"password\": \"Avinash@2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Auth/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 02:58:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmdAZ21haWwuY29tIiwianRpIjoiMTlkZjc1N2ItMzA4Mi00MzExLWIyOTEtYzJlOThlMGI3MWU5IiwiZXhwIjoxNzQxNzUxODk1fQ.LrS0vrJ19ber18Nqa3Ib0KBcxrM_WMoqzFCmlMVPcKg\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/Auth/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response JSON\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Check if the response contains the token\r",
+									"if (jsonData.token) {\r",
+									"    // Set the token in a Postman global variable\r",
+									"    pm.globals.set(\"authToken\", jsonData.token);\r",
+									"    console.log(\"Token set in global variable: \" + jsonData.token);\r",
+									"} else {\r",
+									"    console.error(\"Token not found in response.\");\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user@ecommerce.com\",\r\n  \"password\": \"Admin@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "/api/Auth/login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"string@gmail.com\",\r\n  \"password\": \"Avinash@2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 02:59:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,no-store"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": ".AspNetCore.Identity.Application=CfDJ8C0U9Tp4WXhHmiw_p8spXvRQzTqDdLdOt-gY0qgYesenAx8dP20GMvHPelSc1cn7N7od385hgHJ6bq6WmSyUAgTcCYVFF8wz1TZHHirlY-oJyXHy6bgZlpwlEwHCbdWWwL75Dl4Y9eaI7E23swMizQ7GDUG8kGbZO4gSc3auP_Ib7dWs3GgDItY3WVutai9ReLXXXX2PETxjUb-EsxPF0CuLF3lLtOjnE9eYAav9u10sZGvmjx7IRFpfKTNE5m3AYgz6F3jxFwRqY1pS6GcK5CSC2EfLq7v_rRVCYpH5Jw4jknrCHTFESavoh01l_iioPYORL2b7JWIctMIdArSTZ9nud_zGKcFwxV99vaB4wsJyjcIDwQVAUNvby_ztMnswLYZ3FvsMXtiXBL774ZCpksBd_ReXqPKn6yW3hLxy3OclMYT4cleF3yRkbkqRtysn6eBIQlap8WPMogJEesH0-Lhe_g2z-WUbEnLZZ1mfBLo3xz-g6I4DLVY9goyOgam7vlOaFqWuV1DF5cx5963By1-olFgLAXuKbqlqaXIT2usWiW3oRY6_thFwn8oKLaLqcH-ke_Ngn39N1TU-3MZe0xOKYXZEG2A0Ih1J9gVa_y8yhw6jvs6cCEqulQaoUKi3DhOckg1iuBpEHu_SCqO_U2pKyvFYHzBgePWcacj9XAlVvgYho9fWYQ2YKkm558L61C3xg8NTkrgL4ZuzwFlLNzeUMrMNIy_9eP_ROHPeZio6; path=/; secure; samesite=lax; httponly"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzdHJpbmdAZ21haWwuY29tIiwianRpIjoiYjc1YTgxMmYtYTQ1ZS00ZDEyLThiMjUtMDA3YTIyOGE5NTkwIiwiZXhwIjoxNzQxNzUxOTU1fQ.Mj4BZR6IaBmSlPxirpmI3L5EDb1yY5lBv-kAqYvAA6I\"\n}"
+						},
+						{
+							"name": "/api/Auth/login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"admin@ecommerce.com\",\r\n  \"password\": \"Admin@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 16:02:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache,no-store"
+								},
+								{
+									"key": "Expires",
+									"value": "Thu, 01 Jan 1970 00:00:00 GMT"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": ".AspNetCore.Identity.Application=CfDJ8C0U9Tp4WXhHmiw_p8spXvTLwEC4f1v0-IS1P2DQHndXt3HFj96K-iExPLBb1smHX_cyGAjH48Q4Xno7-KwQL4I9Fb7Kxu0U01C7oeu9-A8xvzDFZqobkBQV_NZzdoxTIlfM-qxcP4XxHqBeoZDigLAf0StNTx-uk_GR7lvYo2M_B_dlJgLd3uvslsMz6fTn-FIGIJfzBAefJwSdwMy4fEpu5vxTX2SuttzvD87pInT1_7lJ1ZW64Z2SLuAe4ywM_Uh8PiQSVU96xDzgRKJOBHcCNZ20cwA3Uk7sfadE4JcxiMYET1nSB2JDR_dxeGuV6yrsR_-wmuE7I-kFmGeuHM16sZhM5rNkGreX1cYtLtKGIb4jythqEyGvAPYrxlx9JUpEbogFOOZUL5VbmO_bf56RRbVCcvmMO0Hqyf7BQmUwMBLc-X2u4VJxlN5jFt6pWjywOm-4gkKB_0VWHL80zNV3mgiYjbZGcePQhpeBAENRbg6ypDjrIiMRebtMp4hEIrfePDLni3YKQ3zilJG7S42jUl8fbNbO9oB6d4iAf7UbFT5QF1kAvKlHSdDNdvBZFSzuy7vr55kpgvprxRAWcrLIkiF1WfaWUbOiFxQEz08-beh8mjJDcHiAm-S91ttHKzwtihA_b4Sf_EH8gkzrcIQFOVsJYAk1MAMtL7kyxDBVWwgkaep_pQR5fndzxGC5UcYoUic2DbZx-dsb02xvGyzrrYfspBtKr2R2j3X0rKzJqtkEqbZmm_tjgRUTArfd9LJ_HLunfFtR8vr6Ter5RPxD3aPEdYiMHMaOkJHtXrsG8t5TjBFUnohP254hmqWF_honzCstUeFk4B8RlRkKqaE; path=/; secure; samesite=lax; httponly"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBlY29tbWVyY2UuY29tIiwianRpIjoiMmQ1NTkxZjUtNjU2ZC00NjViLTg2ZWYtNDJjODE3Zjc5ZWE5IiwiZXhwIjoxNzQxODg1MzMwfQ.iuKvgD9Wy17imIxZuYNb4_WdKGw7xrJ4pTVprL83ta8\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "/api/Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{$randomNoun}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"{{$randomNoun}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Category",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Category"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 02:11:02 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": "https://localhost:7021/api/Category/5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 5,\n    \"name\": \"panel\",\n    \"products\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/Category/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/Category/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/Category/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Category",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Mar 2025 03:05:06 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 4,\n    \"name\": \"string\",\n    \"products\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Category",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/Category",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 13:46:50 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Mobile\",\n        \"products\": []\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Computer\",\n        \"products\": []\n    },\n    {\n        \"id\": 4,\n        \"name\": \"string\",\n        \"products\": []\n    },\n    {\n        \"id\": 5,\n        \"name\": \"panel\",\n        \"products\": []\n    },\n    {\n        \"id\": 6,\n        \"name\": \"port\",\n        \"products\": []\n    }\n]"
+						},
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/Category",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 13:51:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Mobile\",\n        \"products\": []\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Computer\",\n        \"products\": []\n    },\n    {\n        \"id\": 4,\n        \"name\": \"string\",\n        \"products\": []\n    },\n    {\n        \"id\": 5,\n        \"name\": \"panel\",\n        \"products\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "/api/Category/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"port3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Category/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"port3\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Category/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Category",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "6"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 13:48:24 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "/api/Category/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/Category/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Category",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "/api/Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/Product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/Product/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/Product/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/Product/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Product",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/problem+json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 14:19:40 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.5\",\n    \"title\": \"Not Found\",\n    \"status\": 404,\n    \"traceId\": \"00-6a639c6be1f185efdc53844c89a7a82b-58922f25e8caf585-00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Iphone18\",\r\n  \"description\": \"string\",\r\n  \"price\": 50000,\r\n  \"imageUrl\": \"string\",\r\n  \"categoryId\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Product",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Product"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Iphone\",\r\n  \"description\": \"string\",\r\n  \"price\": 50000,\r\n  \"imageUrl\": \"string\",\r\n  \"categoryId\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Product",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Product"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 14:13:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": "https://localhost:7021/api/Product/6"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 6,\n    \"name\": \"Iphone\",\n    \"description\": \"string\",\n    \"price\": 50000,\n    \"imageUrl\": \"string\",\n    \"categoryId\": 5,\n    \"category\": null\n}"
+						},
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Iphone18\",\r\n  \"description\": \"string\",\r\n  \"price\": 50000,\r\n  \"imageUrl\": \"string\",\r\n  \"categoryId\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/Product",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"Product"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Mar 2025 14:15:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "Kestrel"
+								},
+								{
+									"key": "Location",
+									"value": "https://localhost:7021/api/Product/9"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 9,\n    \"name\": \"Iphone18\",\n    \"description\": \"string\",\n    \"price\": 50000,\n    \"imageUrl\": \"string\",\n    \"categoryId\": 5,\n    \"category\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/Product/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Iphone15\",\r\n  \"description\": \"string\",\r\n  \"price\": 60000,\r\n  \"imageUrl\": \"string\",\r\n  \"categoryId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/Product/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "11"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/Product/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/Product/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"Product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{authToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://localhost:7021",
+			"type": "string"
+		}
+	]
+}
