@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Core.Comman;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,9 +18,9 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllCategories()
+    public async Task<ActionResult<PagedResultDto<CategoryDto>>> GetCategories([FromQuery] PaginationParams paginationParams)
     {
-        var categories = await _categoryService.GetAllCategoriesAsync();
+        var categories = await _categoryService.GetAllCategoriesAsync(paginationParams);
         return Ok(categories);
     }
 

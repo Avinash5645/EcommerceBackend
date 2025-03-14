@@ -1,7 +1,9 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using Core.Comman;
 using Core.Entities;
 using Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services;
 
@@ -14,14 +16,27 @@ public class CategoryService : ICategoryService
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<IEnumerable<CategoryDto>> GetAllCategoriesAsync()
+    public async Task<PagedResultDto<CategoryDto>> GetAllCategoriesAsync(PaginationParams paginationParams)
     {
-        var categories = await _categoryRepository.GetAllAsync();
-        return categories.Select(c => new CategoryDto
+        var query = _categoryRepository.AsQueryable();
+
+        var totalCount = await query.CountAsync();
+        var categories = await query
+            .Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+            .Take(paginationParams.PageSize)
+            .Select(c => new CategoryDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+              //  Description = c.Description
+            })
+            .ToListAsync();
+
+        return new PagedResultDto<CategoryDto>
         {
-            Id = c.Id,
-            Name = c.Name
-        });
+            Items = categories,
+            TotalCount = totalCount
+        };
     }
 
     public async Task<CategoryDto> GetCategoryByIdAsync(int id)

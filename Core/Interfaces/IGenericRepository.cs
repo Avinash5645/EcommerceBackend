@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Core.Comman;
+using System.Linq.Expressions;
 
 namespace Core.Interfaces;
 
@@ -10,4 +11,8 @@ public interface IGenericRepository<T> where T : class
     Task AddAsync(T entity);
     void Update(T entity);
     void Delete(T entity);
+
+    // New Methods for Pagination
+    Task<PagedResultDto<T>> GetPagedAsync(PaginationParams paginationParams, Expression<Func<T, bool>>? filter = null);
+    IQueryable<T> AsQueryable();
 }
