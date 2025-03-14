@@ -10,6 +10,8 @@ public class AppDbContext : IdentityDbContext<User>
 
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Category> Categories => Set<Category>();
+    public DbSet<Cart> Carts => Set<Cart>();
+    public DbSet<CartItem> CartItems => Set<CartItem>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -19,5 +21,22 @@ public class AppDbContext : IdentityDbContext<User>
             .HasOne(p => p.Category)
             .WithMany(c => c.Products)
             .HasForeignKey(p => p.CategoryId);
+
+        // Cart - User Relationship
+        builder.Entity<Cart>()
+            .HasOne(c => c.User)
+            .WithOne()
+            .HasForeignKey<Cart>(c => c.UserId);
+
+        // CartItem - Product Relationship
+        builder.Entity<CartItem>()
+            .HasOne(ci => ci.Product)
+            .WithMany()
+            .HasForeignKey(ci => ci.ProductId);
+
+        builder.Entity<CartItem>()
+            .HasOne(ci => ci.Cart)
+            .WithMany(c => c.Items)
+            .HasForeignKey(ci => ci.CartId);
     }
 }
