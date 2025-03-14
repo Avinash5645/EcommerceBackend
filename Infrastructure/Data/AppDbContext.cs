@@ -25,6 +25,11 @@ public class AppDbContext : IdentityDbContext<User>
             .WithMany(c => c.Products)
             .HasForeignKey(p => p.CategoryId);
 
+        builder.Entity<Category>()
+            .HasMany(c => c.Products)
+            .WithOne(p => p.Category)
+            .HasForeignKey(p => p.CategoryId);
+
         // Cart - User Relationship
         builder.Entity<Cart>()
             .HasOne(c => c.User)
