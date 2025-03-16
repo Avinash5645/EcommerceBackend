@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs
 {
-    public class UpdateCategoryDto
+    public class CreatePaymentDto
     {
-        public string Name { get; set; } = string.Empty;
+        public int OrderId { get; set; }
     }
 }

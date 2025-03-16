@@ -1,4 +1,6 @@
-﻿using Core.Interfaces;
+﻿using Application.DTOs;
+using Core.Comman;
+using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -42,5 +44,28 @@ namespace Infrastructure.Data.Repositories
             _context.Set<T>().Remove(entity);
             _context.SaveChanges();
         }
+        public async Task<PagedResultDto<T>> GetPagedAsync(PaginationParams paginationParams, Expression<Func<T, bool>>? filter = null)
+        {
+            var query = _context.Set<T>().AsQueryable();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            var totalCount = await query.CountAsync();
+            var items = await query.Skip((paginationParams.PageNumber - 1) * paginationParams.PageSize)
+                                   .Take(paginationParams.PageSize)
+                                   .ToListAsync();
+
+            return new PagedResultDto<T>
+            {
+                Items = items,
+                TotalCount = totalCount
+            };
+        }
+
+        public IQueryable<T> AsQueryable() => _context.Set<T>().AsQueryable();
+
     }
 }
